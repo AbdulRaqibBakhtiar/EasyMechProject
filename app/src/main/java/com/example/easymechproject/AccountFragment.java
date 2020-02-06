@@ -1,5 +1,6 @@
 package com.example.easymechproject;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
+    private static final int PICK_IMAGE_REQUEST = 22;
     SQLiteDatabase db;
     SQLiteOpenHelper openHelper;
     Cursor cursor;
@@ -31,20 +37,28 @@ public class AccountFragment extends Fragment {
     private DatabaseReference easyMechDriverRef;
     private FirebaseAuth easyMechAuth;
     private FirebaseUser easyMechCurrentUser;
-
-
+    CircleImageView profilePhoto;
 
     private TextView user_name, user_email, user_phone, profile_names, profile_emails;
     private Button user_update, user_logout;
-
+    private ImageView imageView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
-        openHelper = new DatabaseHelper(getContext());
-        db=openHelper.getReadableDatabase();
+        profilePhoto = (CircleImageView) rootView.findViewById(R.id.profile_picture);
+
+        profilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), UploadProfileImage.class));
+            }
+        });
+
+
+
         user_name = (TextView) rootView.findViewById(R.id.user_account_name);
         user_email = (TextView) rootView.findViewById(R.id.user_email);
         user_phone = (TextView) rootView.findViewById(R.id.user_phone);
@@ -69,31 +83,19 @@ public class AccountFragment extends Fragment {
                 String phone = dataSnapshot.child("mobile").getValue().toString();
                 String pass = dataSnapshot.child("password").getValue().toString();
 
+                String image = dataSnapshot.child("thumb_image").getValue().toString();
+
+                Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePhoto);
+
+
+
+
                 user_name.setText(name);
                 user_email.setText(email);
                 user_phone.setText(phone);
                 profile_names.setText(name);
                 profile_emails.setText(email);
 
-/*                if(!image.equals("default")){
-                    // Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePic);
-
-                    Picasso.get().
-                            load(image)
-                            .networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_profile).into(profilePic, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Toast.makeText(getContext(), "Offline works", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePic);
-                        }
-                    });
-
-                }*/
             }
 
             @Override
@@ -102,23 +104,11 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        
 
-        // user_logout = (Button)rootView.findViewById(R.id.login_btn);
-      /*  cursor = db.rawQuery("SELECT * FROM "+DatabaseHelper.TABLE_NAME+ " WHERE " +DatabaseHelper.KEY_NAME+ "=? AND" +
-                " "+DatabaseHelper.KEY_PASS+"=?", new String[]{"Nova","12345678"}); */
-   /*     cursor = db.rawQuery("SELECT * FROM "+DatabaseHelper.TABLE_NAME, null);
-
-        if(cursor.getCount()==0){
-            Toast.makeText(getContext(),"Nothing found",Toast.LENGTH_LONG).show();
-        }
-        while (cursor.moveToNext()){
-            user_name.setText(cursor.getString(1));
-            user_email.setText(cursor.getString(3));
-            user_phone.setText(cursor.getString(2));
-            profile_names.setText(cursor.getString(1));
-            profile_emails.setText(cursor.getString(3));
-        }*/
 
         return rootView;
     }
+
+
 }

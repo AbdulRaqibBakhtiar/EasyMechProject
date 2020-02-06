@@ -117,8 +117,10 @@
             android:layout_marginTop="1dp">
 
             <TextView
+                android:id="@+id/descriptionsss"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:textColor="#090909"
                 android:textSize="19dp"
                 android:text="Car repair and maintenance"
             />
@@ -143,10 +145,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textColor="#1091DD"
                 android:clickable="true"
                 android:onClick="map_from_here"
                 android:paddingLeft="20dp"
-                android:text="8_3_anjuna_mapusa_rd_khorlim_mapusa_goa_403507" />
+                android:text="8-3, anjuna-mapusa-rd_khorlim_mapusa_goa_403507" />
 
         </LinearLayout>
 
@@ -167,6 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
+                android:textColor="#E67211"
                 android:clickable="true"
                 android:onClick="call_from_here"
                 android:text="+919232452355" />
@@ -188,6 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
+                android:textColor="#00695C"
                 android:onClick="appoint_from_here"
                 android:paddingLeft="20dp"
                 android:text="Set an appintment" />
@@ -203,7 +208,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/account_logut_btn"
+            android:id="@+id/account_chat_button"
             android:layout_width="206dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom"

@@ -72,7 +72,7 @@ public class Base_Home extends AppCompatActivity{
                     pass_word.requestFocus();
                     return;
                 }
-                //loginUser(emails, pass);
+                loginUser(emails, pass);
                 Intent intent = new Intent(Base_Home.this,Services_LIsts.class);
                 startActivity(intent);
                 /*else if(cursor!=null){

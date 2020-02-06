@@ -3,6 +3,7 @@ package com.example.easymechproject;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainMenu_View extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,23 +36,7 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
     SearchView searchView;
     //TextView show_rate;
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.mechanis_search_menu, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-
-        SearchManager searchManager = (SearchManager) MainMenu_View.this.getSystemService(Context.SEARCH_SERVICE);
-
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-        }
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainMenu_View.this.getComponentName()));
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +83,46 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
         list.add(new Mechanics("Alcon Hyundai","Survey No 20/1, National Highway No 17, Porvorim, Goa - 403501, Near Damian De Goa Showroom",R.drawable.alcon_hyndai));
         list.add(new Mechanics("Bavaria Motors Pvt Ltd","Plot Number 2 B, Verna, Goa - 403722, Phase 1A, Verna Industries Estate, NH.",R.drawable.haider_khan));
 
+    }
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.mechanis_search_menu, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(TextUtils.isEmpty(newText)){
+                    adapterList.filter("");
+                    listView.clearTextFilter();
+                }
+                else {
+                    adapterList.filter(newText);
+                }
+                return true;
+            }
+
+        });
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id==R.id.action_search){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.easymechproject;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class  AppointmentSpinner_Adapter extends ArrayAdapter<StateVO> {
     private ArrayList<StateVO> listState;
     private  AppointmentSpinner_Adapter myAdapter;
     private boolean isFromView = false;
+    private DatabaseReference easyMechRef;
 
     public  AppointmentSpinner_Adapter(Context context, int resource, List<StateVO> objects) {
         super(context, resource, objects);
@@ -63,7 +66,6 @@ public class  AppointmentSpinner_Adapter extends ArrayAdapter<StateVO> {
 
         if ((position == 0)) {
             holder.mCheckBox.setVisibility(View.INVISIBLE);
-            holder.mCheckBox.setTextColor(Color.parseColor("#FF0000"));
         } else {
             holder.mCheckBox.setVisibility(View.VISIBLE);
         }
@@ -73,6 +75,17 @@ public class  AppointmentSpinner_Adapter extends ArrayAdapter<StateVO> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int getPosition = (Integer) buttonView.getTag();
+
+                for(int i=1;i<=9;i++){
+                    if(getPosition==i){
+                        if(isChecked){
+                            String data = holder.mTextView.getText().toString();
+                            easyMechRef = FirebaseDatabase.getInstance().getReference().child("Notify");
+                            easyMechRef.setValue(data);
+                        }
+
+                    }
+                }
 
                 if (!isFromView) {
                     listState.get(position).setSelected(isChecked);

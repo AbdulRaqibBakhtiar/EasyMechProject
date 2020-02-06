@@ -3,6 +3,7 @@ package com.example.easymechproject;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.TimePickerDialog;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -50,17 +52,22 @@ public class Appointments extends AppCompatActivity {
                 "Choose Services", "Air Filter", "Oil Filter", "Engine Oil", "Wiper Fluid",
                 "Cabin Filter / AC Filter", "Car Wash","Interior Vacuuming","Throttle Body Cleaning","Lost Keys"};
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        car_plate = (EditText)findViewById(R.id.Car_Plate_Field);
 
         ArrayList<StateVO> listVOs = new ArrayList<>();
+        ArrayList<String> choosed_services = new ArrayList<>();
 
         for (int i = 0; i < select_services.length; i++) {
             StateVO stateVO = new StateVO();
             stateVO.setTitle(select_services[i]);
             stateVO.setSelected(false);
             listVOs.add(stateVO);
+
         }
+
         AppointmentSpinner_Adapter myAdapter = new  AppointmentSpinner_Adapter(Appointments.this, 0,
                 listVOs);
+
         spinner.setAdapter(myAdapter);
 
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.input_car_model);
@@ -79,7 +86,7 @@ public class Appointments extends AppCompatActivity {
         choose_date = (EditText)findViewById(R.id.choose_date);
         choose_time = (EditText)findViewById(R.id.choose_time);
         address = (EditText)findViewById(R.id.Address_Field);
-        car_plate = (EditText)findViewById(R.id.Car_Plate_Field);
+
         home_service = (RadioButton)findViewById(R.id.HomeService);
 
         center_service = (RadioButton)findViewById(R.id.ServicesCenter);
@@ -117,6 +124,7 @@ public class Appointments extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(Appointments.this,onDateSetListener, year, month, day);
+                datePickerDialog.setTitle("Choose a Date");
                 datePickerDialog.show();
             }
         });
@@ -128,6 +136,24 @@ public class Appointments extends AppCompatActivity {
                 choose_date.setText(date);
             }
         };
+
+        choose_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Appointments.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        choose_time.setText(hourOfDay + ":"+minute);
+                    }
+                },hour,minute,true);
+                timePickerDialog.setTitle("Choose Time");
+                timePickerDialog.show();
+            }
+        });
 
         book_now.setOnClickListener(new View.OnClickListener() {
             @Override

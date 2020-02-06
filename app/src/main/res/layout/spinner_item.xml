@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:textColor="#2279DD"
+        android:textColor="#D84315"
         android:textSize="18dp"
         android:text="text"
         android:textAlignment="gravity" />
