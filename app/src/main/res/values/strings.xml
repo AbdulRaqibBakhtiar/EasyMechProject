@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EASYMECH</string>
+    <string name="app_name">EasyMechProject</string>
     <string name="title_activity_main__menu">Main_Menu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

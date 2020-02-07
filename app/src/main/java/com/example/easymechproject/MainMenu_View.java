@@ -1,7 +1,5 @@
 package com.example.easymechproject;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -22,20 +20,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MainMenu_View extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView listView;
-    ArrayList<Mechanics> list;
     AdapterList adapterList;
+    String[] title;
+    String[] description;
+    int[] images;
+    ArrayList<Mechanics> mechanics = new ArrayList<Mechanics>();
+
     RatingBar rate_bar;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    SearchView searchView;
-    //TextView show_rate;
-
 
 
     @Override
@@ -43,22 +41,13 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu__view);
 
+
+
+
         toolbar = (Toolbar) findViewById(R.id.tool_Bar);
         toolbar.setTitle("All Mechanics");
         setSupportActionBar(toolbar);
 
-        //rate_bar = findViewById(R.id.ratingBar);
-        listView = findViewById(R.id.listview_view);
-        //show_rate = findViewById(R.id.Show_rate);
-        listShow();
-        adapterList = new AdapterList(this, list);
-        listView.setAdapter(adapterList);
-
-        // float ratingValue = rate_bar.getRating();
-        // show_rate.setText(" "+ratingValue);
-
-
-        // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contatiner,new HomeFragment()).commit();
 
         toolbar = (Toolbar) findViewById(R.id.tool_Bar);
         setSupportActionBar(toolbar);
@@ -72,19 +61,24 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        title = new String[]{"Auto Car Experts ","HYDER KHAN MOTOR Garage","Sharayu Toyota","Auto Pro","Alcon Hyundai","Bavaria Motors Pvt Ltd"};
+
+        description = new String[]{"256/5 Diaswaddo, Arpora Calangute Road, Arpora, Goa - 403516, Near Dream Circle","TALEIGAO Band, Santa Cruz Road Taleigao, Taleigao, Goa - 403001, Near By Essar Residency",
+                "Survey No 116/3, National Highway No 17, Cortalim, Goa - 403710, Kesarval Verna, Opposite Kesarval Garden Hotel","Pundalik Nagar, Alto Porvorim, Goa - 403521, Nr Club De Goa",
+                "Survey No 20/1, National Highway No 17, Porvorim, Goa - 403501, Near Damian De Goa Showroom","Plot Number 2 B, Verna, Goa - 403722, Phase 1A, Verna Industries Estate, NH."};
+
+        images = new int[]{R.drawable.auto_experts, R.drawable.bavarati_auto,R.drawable.sharya_toyota,R.drawable.auto_pro,R.drawable.alcon_hyndai,R.drawable.haider_khan};
+
+        listView = findViewById(R.id.listview_view);
+
+        for(int i=0; i<title.length; i++){
+            Mechanics mechanic = new Mechanics(title[i],description[i],images[i]);
+            mechanics.add(mechanic);
+        }
+        adapterList = new AdapterList(this, mechanics);
+        listView.setAdapter(adapterList);
+
     }
-    public void listShow(){
-        list = new ArrayList<Mechanics>();
-
-        list.add(new Mechanics("Auto Car Experts ","256/5 Diaswaddo, Arpora Calangute Road, Arpora, Goa - 403516, Near Dream Circle",R.drawable.auto_experts));
-        list.add(new Mechanics("HYDER KHAN MOTOR Garage","TALEIGAO Band, Santa Cruz Road Taleigao, Taleigao, Goa - 403001, Near By Essar Residency",R.drawable.bavarati_auto));
-        list.add(new Mechanics("Sharayu Toyota","Survey No 116/3, National Highway No 17, Cortalim, Goa - 403710, Kesarval Verna, Opposite Kesarval Garden Hotel",R.drawable.sharya_toyota));
-        list.add(new Mechanics("Auto Pro","Pundalik Nagar, Alto Porvorim, Goa - 403521, Nr Club De Goa",R.drawable.auto_pro));
-        list.add(new Mechanics("Alcon Hyundai","Survey No 20/1, National Highway No 17, Porvorim, Goa - 403501, Near Damian De Goa Showroom",R.drawable.alcon_hyndai));
-        list.add(new Mechanics("Bavaria Motors Pvt Ltd","Plot Number 2 B, Verna, Goa - 403722, Phase 1A, Verna Industries Estate, NH.",R.drawable.haider_khan));
-
-    }
-
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,7 +104,7 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
                 else {
                     adapterList.filter(newText);
                 }
-                return true;
+                return false;
             }
 
         });
@@ -119,7 +113,7 @@ public class MainMenu_View extends AppCompatActivity implements NavigationView.O
 
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id==R.id.action_search){
+        if(id==R.id.action_settings){
             return true;
         }
         return super.onOptionsItemSelected(item);
