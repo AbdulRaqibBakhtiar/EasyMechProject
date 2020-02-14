@@ -1,5 +1,6 @@
 package com.example.easymechproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,6 +32,7 @@ public class Sign_up_activity extends AppCompatActivity {
     SQLiteOpenHelper openHelper;
     SQLiteDatabase db;
     Button _sign_button;
+    ProgressDialog progressDialog;
     EditText editID, textname,textpass2, textphone, textemail, textpass;
     String id, name, phone, email,  pass1, pass2,code;
     private Spinner spinner;

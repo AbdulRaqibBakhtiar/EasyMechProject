@@ -1,23 +1,16 @@
 package com.example.easymechproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.TaskExecutor;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.view.View.OnClickListener;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,8 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-
-
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +31,7 @@ public class Mobile_OTP extends AppCompatActivity {
     private EditText code_text;
     private String code;
     private ProgressBar PB;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -65,6 +57,9 @@ public class Mobile_OTP extends AppCompatActivity {
                     return;
                 }
                 PB.setVisibility(View.VISIBLE);
+               /* progressDialog.setTitle("Please Wait...");
+                progressDialog.setMessage("It takes time virify your ");
+                progressDialog.show();*/
                 verifyCode(code);
 
             }

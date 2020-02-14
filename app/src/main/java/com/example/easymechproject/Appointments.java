@@ -11,66 +11,273 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
-public class Appointments extends AppCompatActivity {
+public class Appointments extends AppCompatActivity{
 
-    EditText  choose_date, address, car_plate, choose_time;
-    AutoCompleteTextView autoCompleteTextView;
+    EditText  choose_date, address, car_plate, choose_time, car_problem;
+    AutoCompleteTextView car_Model;
     Button book_now, reset;
     DatePickerDialog.OnDateSetListener onDateSetListener;
-    public String Car_Model, Choose_Date, Add_Address, Zip_Code , Plate_No, OIL_FILT;
+    public String Choose_Date, Choose_Time, Add_Address, Plate_No, Car_Model, Car_Problem;
+    public String Driver_name, Driver_Phone, Driver_Email;
     private final String CHANNEL_ID = "inbox_style_notification";
     private final int NOTIFICATION_ID = 04;
     RadioButton home_service, center_service;
     Toolbar toolbar;
-
+    private DatabaseReference easyMechDriverRef;
+    private FirebaseAuth easyMechAuth;
+    private FirebaseUser easyMechCurrentUser;
+    private DatabaseReference easyMechRef, easyMechRef2;
+    public String Mechanic_Name, Services="";
+    double Costs = 0;
+    private CheckBox  check1, check2, check3, check4, check5, check6, check7, check8, check9;
+    TextView cost, reset_label, costss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointments);
 
+        Mechanic_Name = getIntent().getStringExtra("M_name");
+
         toolbar = (Toolbar) findViewById(R.id.tool_Bar);
         toolbar.setTitle("Set an Appointment");
         setSupportActionBar(toolbar);
 
-        final String[] select_services = {
-                "Choose Services", "Air Filter", "Oil Filter", "Engine Oil", "Wiper Fluid",
-                "Cabin Filter / AC Filter", "Car Wash","Interior Vacuuming","Throttle Body Cleaning","Lost Keys"};
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        cost = (TextView)findViewById(R.id.Cost1);
+        costss = (TextView)findViewById(R.id.TotalCost);
+        reset_label = (TextView)findViewById(R.id.Cost2);
+        //reset = (Button)findViewById(R.id.clearButton);
+
+        car_Model = (AutoCompleteTextView) findViewById(R.id.input_car_model);
         car_plate = (EditText)findViewById(R.id.Car_Plate_Field);
+        choose_date = (EditText)findViewById(R.id.choose_date);
+        choose_time = (EditText)findViewById(R.id.choose_time);
+        address = (EditText)findViewById(R.id.Address_Field);
+        car_problem = (EditText)findViewById(R.id.tell_problem);
 
-        ArrayList<StateVO> listVOs = new ArrayList<>();
-        ArrayList<String> choosed_services = new ArrayList<>();
+        check1 = (CheckBox)findViewById(R.id.checkBox);
+        check2 = (CheckBox)findViewById(R.id.checkBox2);
+        check3 = (CheckBox)findViewById(R.id.checkBox3);
+        check4 = (CheckBox)findViewById(R.id.checkBox4);
+        check5 = (CheckBox)findViewById(R.id.checkBox5);
+        check6 = (CheckBox)findViewById(R.id.checkBox6);
+        check7 = (CheckBox)findViewById(R.id.checkBox7);
+        check8 = (CheckBox)findViewById(R.id.checkBox8);
+        check9 = (CheckBox)findViewById(R.id.checkBox9);
 
-        for (int i = 0; i < select_services.length; i++) {
-            StateVO stateVO = new StateVO();
-            stateVO.setTitle(select_services[i]);
-            stateVO.setSelected(false);
-            listVOs.add(stateVO);
+        check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check1.isChecked()){
+                    String data = "Air Filter";
+                    Services+=data+", ";
+                    double price = 200;
+                    Costs+=price;
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
 
-        }
+                }
+            }
+        });
+        check2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check2.isChecked()){
+                    String data = "Oil Filter";
+                    Services+=data+", ";
+                    double price = 400;
+                    Costs+=price;
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check3.isChecked()){
+                    String data = "Engine Oil";
+                    Services+=data+", ";
+                    double price = 600;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check4.isChecked()){
+                    String data = "Wiper Fluid";
+                    Services+=data+", ";
+                    double price = 350;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check5.isChecked()){
+                    String data = "Cabin Filter / AC Filter";
+                    Services+=data+", ";
+                    double price = 1200;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check6.isChecked()){
+                    String data = "Car Wash";
+                    Services+=data+", ";
+                    double price = 550;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check7.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check7.isChecked()){
+                    String data = "Interior Vacuuming";
+                    Services+=data+", ";
+                    double price = 350;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check8.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check8.isChecked()){
+                    String data = "Throttle Body Cleaning";
+                    Services+=data+", ";
+                    double price = 1000;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
+        check9.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(check9.isChecked()){
+                    String data = "Lost Keys";
+                    Services+=data+", ";
+                    double price = 100;
+                    Costs+=price;
+                    cost.setVisibility(View.VISIBLE);
+                    costss.setVisibility(View.VISIBLE);
+                    reset_label.setVisibility(View.VISIBLE);
+                    cost.setText("Service Cost: "+price);
+                    costss.setText("Total Cost: "+Costs);
+                }
+            }
+        });
 
-        AppointmentSpinner_Adapter myAdapter = new  AppointmentSpinner_Adapter(Appointments.this, 0,
-                listVOs);
-
-        spinner.setAdapter(myAdapter);
-
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.input_car_model);
+        reset_label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Costs=0;
+                cost.setText("Service Cost: 0.0   Total Cost: 0.0");
+                if(check1.isChecked()){
+                    check1.toggle();
+                }
+                if(check2.isChecked()){
+                    check2.toggle();
+                }
+                if(check3.isChecked()){
+                    check3.toggle();
+                }
+                if(check4.isChecked()){
+                    check4.toggle();
+                }
+                if(check5.isChecked()){
+                    check5.toggle();
+                }
+                if(check6.isChecked()){
+                    check6.toggle();
+                }
+                if(check7.isChecked()){
+                    check7.toggle();
+                }
+                if(check8.isChecked()){
+                    check8.toggle();
+                }
+                if(check9.isChecked()){
+                    check9.toggle();
+                }
+                if(Costs==0){
+                    costss.setVisibility(View.GONE);
+                    cost.setVisibility(View.GONE);
+                }
+            }
+        });
 
         final ArrayList<String> myCarModels = new ArrayList<>();
         myCarModels.add("TOYOTA");
@@ -81,14 +288,10 @@ public class Appointments extends AppCompatActivity {
         myCarModels.add("Honda");
         myCarModels.add("Mistubishi");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, myCarModels);
-        autoCompleteTextView.setAdapter(adapter);
+        car_Model.setAdapter(adapter);
 
-        choose_date = (EditText)findViewById(R.id.choose_date);
-        choose_time = (EditText)findViewById(R.id.choose_time);
-        address = (EditText)findViewById(R.id.Address_Field);
 
         home_service = (RadioButton)findViewById(R.id.HomeService);
-
         center_service = (RadioButton)findViewById(R.id.ServicesCenter);
 
 
@@ -158,24 +361,109 @@ public class Appointments extends AppCompatActivity {
         book_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Car_Model = autoCompleteTextView.getText().toString();
+
+                String total_cost = String.valueOf(Costs);
+                Car_Model = car_Model.getText().toString();
                 Choose_Date = choose_date.getText().toString();
                 Add_Address = address.getText().toString();
                 Plate_No = car_plate.getText().toString();
+                Choose_Time = choose_time.getText().toString();
+                Car_Problem = car_problem.getText().toString();
+
+                easyMechAuth = FirebaseAuth.getInstance();
+                easyMechCurrentUser = easyMechAuth.getCurrentUser();
+                easyMechDriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers").child(easyMechCurrentUser.getUid());
+                String user_id = easyMechAuth.getCurrentUser().getUid();
 
 
-                createNotificationChannel();
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
-                builder.setSmallIcon(R.drawable.easy_mech);
-                builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.easy_mech));
-                builder.setContentTitle("Appointment Set! More Details Below");
-                builder.setStyle(new NotificationCompat.InboxStyle()
-                        .addLine(Car_Model+" "+Choose_Date +" "+Add_Address+" "+Zip_Code+" "+Plate_No)
-                        .setSummaryText("+2 More")
-                );
-                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(Appointments.this);
-                notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+                easyMechRef = FirebaseDatabase.getInstance().getReference();
+                easyMechRef2 = FirebaseDatabase.getInstance().getReference().child("Drivers").child(user_id).child("Appointments_Lists").push();
+                easyMechRef2.child("Appointment Date").setValue(Choose_Date);
+                easyMechRef2.child("Appointment Time").setValue(Choose_Time);
+                easyMechRef2.child("Appointment Accepted").setValue("false");
+                easyMechRef2.child("Appointment Processed").setValue("false");
+                easyMechRef2.child("Required Service").setValue(Car_Problem);
+                easyMechRef2.child("Total Cost").setValue(total_cost);
+                easyMechRef2.child("Cancelled").setValue("false");
+                easyMechRef2.child("Extra Services").setValue(Services);
+
+                setMechName(Mechanic_Name);
+
+
+
+                easyMechDriverRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        Driver_name = dataSnapshot.child("name").getValue().toString();
+                        Driver_Email = dataSnapshot.child("email").getValue().toString();
+                        Driver_Phone = dataSnapshot.child("mobile").getValue().toString();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Appointments.this,"Error Loading User Details",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                HashMap<String, String> userMap = new HashMap<>();
+                userMap.put("Driver Name", Driver_name);
+                userMap.put("Driver Email", Driver_Email);
+                userMap.put("Driver Phone", Driver_Phone);
+                userMap.put("Car Model", Car_Model);
+                userMap.put("Car Plate", Plate_No);
+                userMap.put("Driver Address", Add_Address);
+                userMap.put("Appointment Date",Choose_Date);
+                userMap.put("Appointment Time", Choose_Time);
+                userMap.put("Appointment Accepted", "false");
+                userMap.put("Appointment Processed", "false");
+                userMap.put("Extra Services",Services);
+                userMap.put("Total Cost", total_cost);
+                userMap.put("Cancelled", "false");
+                userMap.put("Required Service",Car_Problem);
+
+
+
+                easyMechRef.child("Mechanics").child(Mechanic_Name).child("Appointments").child(user_id).push().setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Appointments.this, "Your Appointment Is Under Process!", Toast.LENGTH_LONG).show();
+
+                            createNotificationChannel();
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+                            builder.setSmallIcon(R.drawable.bat_tery);
+                            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.bat_tery));
+                            builder.setContentTitle("Hi Mr. "+Driver_name+ " Thanks For Choosing Our Services");
+                            builder.setStyle(new NotificationCompat.InboxStyle()
+                                    .addLine(" Your appointment is under processor for Car Model: "+Car_Model +"\n Plate Number: "+Plate_No).addLine("Date Of Appointment: "+Choose_Date+" at "+Choose_Time)
+                                    .setSummaryText("You Will Be Notified Again Later!")
+                            );
+                            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(Appointments.this);
+                            notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(Appointments.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+
+                HashMap<String, String> DriverMap = new HashMap<>();
+                userMap.put("Appointment Date",Choose_Date);
+                userMap.put("Appointment Time", Choose_Time);
+                userMap.put("Appointment Accepted", "false");
+                userMap.put("Appointment Processed", "false");
+                userMap.put("Required Services", Services);
+                userMap.put("Total Cost", total_cost);
+                userMap.put("Cancelled", "false");
+
+
 
             }
         });
@@ -193,6 +481,14 @@ public class Appointments extends AppCompatActivity {
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
         }
+    }
+
+    public String setMechName(String name){
+        Mechanic_Name = name;
+        return Mechanic_Name;
+    }
+    public String getMechName(){
+        return Mechanic_Name;
     }
 }
 

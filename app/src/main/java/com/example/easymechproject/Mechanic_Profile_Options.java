@@ -6,23 +6,32 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Mechanic_Profile_Options extends AppCompatActivity {
     private TextView call_up;
     private TextView search_loc;
-    TextView titless, desccs;
-    Button call_here, chat_here;
+    TextView titless, desccs, phone, emails, user_address , pro_name, pro_email;
+    FloatingActionButton chat_here;
+    private DatabaseReference easyMechMechanicRef, easyMechMechanicsRef;
+    String address, email, phones, descriptions, name, titles;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String titles = getIntent().getStringExtra("title");
+        titles = getIntent().getStringExtra("title");
         String describes = getIntent().getStringExtra("describe");
        // int imgg = getIntent().getIntExtra("images",imgg);
 
@@ -31,11 +40,44 @@ public class Mechanic_Profile_Options extends AppCompatActivity {
 
         titless = (TextView)findViewById(R.id.user_account_name);
         desccs = (TextView)findViewById(R.id.descriptionsss);
+        phone = (TextView)findViewById(R.id.mechanic_phone1);
+        emails = (TextView)findViewById(R.id.email_field);
+        user_address = (TextView)findViewById(R.id.user_addresses);
+        pro_email = (TextView)findViewById(R.id.profile_email);
+        pro_name = (TextView)findViewById(R.id.profile_name);
 
-        titless.setText(titles);
-        desccs.setText(describes);
 
-        chat_here = (Button)findViewById(R.id.account_chat_button);
+        easyMechMechanicRef = FirebaseDatabase.getInstance().getReference().child("Mechanics").child(titles);
+        easyMechMechanicRef.keepSynced(true);
+        easyMechMechanicRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                address = dataSnapshot.child("address").getValue().toString();
+                email = dataSnapshot.child("email").getValue().toString();
+                phones = dataSnapshot.child("phone").getValue().toString();
+                descriptions = dataSnapshot.child("description").getValue().toString();
+                name = dataSnapshot.getValue().toString();
+
+                //String image = dataSnapshot.child("thumb_image").getValue().toString();
+                //Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePhoto);
+
+                pro_name.setText(titles);
+                pro_email.setText(email);
+
+                titless.setText(titles);
+                desccs.setText(descriptions);
+                user_address.setText(address);
+                phone.setText(phones);
+                emails.setText(email);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        chat_here = (FloatingActionButton) findViewById(R.id.account_chat_button);
         chat_here.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +98,10 @@ public class Mechanic_Profile_Options extends AppCompatActivity {
     }
 
     public void appoint_from_here(View v){
-        startActivity(new Intent(Mechanic_Profile_Options.this, Appointments.class));
+        Intent appointment = new Intent(Mechanic_Profile_Options.this, Appointments.class);
+        appointment.putExtra("M_name",titles);
+
+        startActivity(new Intent(appointment));
     }
 
     public void call_from_here(View v){

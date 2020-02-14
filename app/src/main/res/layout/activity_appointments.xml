@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,147 +8,188 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_Bar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="45dp"
+        android:layout_width="411dp"
+        android:layout_height="51dp"
         android:background="#FF5622"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:titleTextColor="#F44336"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:titleTextColor="#F44336">
 
 
     </androidx.appcompat.widget.Toolbar>
 
 
+    <TextView
+        android:id="@+id/Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Time! Get verified sellers for Car Breakdown Services"
+        android:textColor="#1565C0"
+        android:textSize="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="412dp" />
+
     <AutoCompleteTextView
         android:id="@+id/input_car_model"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="15dp"
         android:hint="Car Model?"
-        app:layout_constraintBottom_toTopOf="@+id/Car_Plate_Field"
-        app:layout_constraintEnd_toEndOf="@+id/Car_Plate_Field"
-        app:layout_constraintStart_toStartOf="@+id/Car_Plate_Field"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="154dp" />
 
     <EditText
         android:id="@+id/Car_Plate_Field"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:hint="Plate Number"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/choose_date"
-        app:layout_constraintEnd_toEndOf="@+id/choose_date"
-        app:layout_constraintStart_toStartOf="@+id/choose_date"
-        app:layout_constraintTop_toBottomOf="@+id/input_car_model" />
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="216dp" />
 
     <EditText
         android:id="@+id/choose_date"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="15dp"
         android:ems="10"
         android:focusable="false"
         android:hint="Date"
         android:inputType="none"
-        app:layout_constraintBottom_toTopOf="@+id/choose_time"
-        app:layout_constraintEnd_toEndOf="@+id/choose_time"
-        app:layout_constraintStart_toStartOf="@+id/choose_time"
-        app:layout_constraintTop_toBottomOf="@+id/Car_Plate_Field" />
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="277dp" />
 
     <EditText
         android:id="@+id/choose_time"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:focusable="false"
         android:hint="Time"
         android:inputType="none"
-        app:layout_constraintBottom_toTopOf="@+id/Select_One"
-        app:layout_constraintEnd_toEndOf="@+id/bookButton"
-        app:layout_constraintStart_toStartOf="@+id/Linear_Layout"
-        app:layout_constraintTop_toBottomOf="@+id/choose_date" />
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="336dp" />
+
+    <EditText
+        android:id="@+id/tell_problem"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:textSize="15dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:focusable="true"
+        android:hint="Tell Us Your Problem"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="336dp" />
+
+    <TextView
+        android:id="@+id/Cost1"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:textColor="#0277BD"
+        android:textSize="15dp"
+        android:visibility="gone"
+        android:text="Priceses"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="412dp" />
+
+    <TextView
+        android:id="@+id/TotalCost"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:textColor="#0277BD"
+        android:textSize="15dp"
+        android:visibility="gone"
+        android:text="Total"
+        android:layout_marginTop="402dp"
+        android:layout_marginLeft="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="412dp" />
+
+    <TextView
+    android:id="@+id/Cost2"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:textColor="#BD0227"
+    android:textSize="16dp"
+    android:text="Reset"
+        android:visibility="gone"
+    android:clickable="true"
+    android:layout_marginTop="420dp"
+    android:layout_marginLeft="60dp"
+    tools:layout_editor_absoluteX="16dp"
+    tools:layout_editor_absoluteY="412dp" />
+
 
     <TextView
         android:id="@+id/Select_One"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="10dp"
         android:text="Select Location (Select Only One)"
         android:textColor="#2279DD"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/ServicesCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_time" />
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="412dp" />
 
     <RadioButton
         android:id="@+id/ServicesCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="14dp"
         android:layout_weight="1"
         android:text="Service Center"
         android:textColor="#DF2121"
-        app:layout_constraintBottom_toTopOf="@+id/Linear_Layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/HomeService"
-        app:layout_constraintTop_toBottomOf="@+id/Select_One" />
+        android:layout_marginTop="490dp"
+        android:layout_marginLeft="220dp"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="446dp" />
+
 
     <RadioButton
         android:id="@+id/HomeService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="490dp"
         android:layout_weight="1"
         android:text="Home Services"
         android:textColor="#DF2121"
-        app:layout_constraintEnd_toStartOf="@+id/ServicesCenter"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Select_One" />
-
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_car_model"
-        app:layout_constraintEnd_toEndOf="@+id/input_car_model"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tool_Bar" />
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="446dp" />
 
     <LinearLayout
         android:id="@+id/Linear_Layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/bookButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ServicesCenter">
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="535dp"
+        android:layout_marginLeft="16dp"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="492dp">
 
         <EditText
             android:id="@+id/Address_Field"
             android:layout_width="387dp"
-            android:layout_height="51dp"
+            android:layout_height="40dp"
+            android:textSize="15dp"
             android:ems="10"
             android:hint="Enter Address with Zip Code"
             android:inputType="textPersonName"
@@ -160,31 +201,110 @@
 
 
     <Button
-        android:id="@+id/resetButton"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginEnd="22dp"
-        android:background="@drawable/logout_btn_style"
-        android:text="Reset"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBaseline_toBaselineOf="@+id/bookButton"
-        app:layout_constraintEnd_toStartOf="@+id/bookButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/bookButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
         android:background="@drawable/logout_btn_style"
-        android:text="Book Now"
+        android:text="Submit Requirements"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="15dp"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/resetButton"
-        app:layout_constraintTop_toBottomOf="@+id/Linear_Layout" />
+        tools:layout_editor_absoluteX="209dp"
+        tools:layout_editor_absoluteY="572dp" />
+
+    <LinearLayout
+        android:id="@+id/Linear_Layout2"
+        android:layout_width="167dp"
+        android:layout_height="306dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="240dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="154dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:textSize="15dp"
+            android:textColor="#0277BD"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:text="Extra Services" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:layout_height="wrap_content"
+            android:text="Air Filter" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Oil Filter" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Engine Oil" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Wiper Fluid" />
+
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Cabin Filter / AC Filter" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <CheckBox
+            android:id="@+id/checkBox6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Car Wash" />
+
+        <CheckBox
+            android:id="@+id/checkBox7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Interior Vacuuming" />
+
+        <CheckBox
+            android:id="@+id/checkBox8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Throttle Body Cleaning" />
+
+        <CheckBox
+            android:id="@+id/checkBox9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#292C30"
+            android:text="Lost Keys" />
+    </LinearLayout>
+
+
+</RelativeLayout>

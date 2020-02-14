@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".UploadProfileImage"></activity>
+        <activity android:name=".System_management"></activity>
+        <activity android:name=".UploadProfileImage" />
         <activity android:name=".ChatApp" />
         <activity android:name=".Appointments" />
         <activity android:name=".Fargot_Password" />

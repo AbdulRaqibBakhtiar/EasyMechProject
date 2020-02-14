@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +38,7 @@ public class AccountFragment extends Fragment {
     private FirebaseUser easyMechCurrentUser;
     CircleImageView profilePhoto;
 
-    private TextView user_name, user_email, user_phone, profile_names, profile_emails;
+    private TextView user_name, user_email, user_phone, profile_names, profile_emails, profile_logout;
     private Button user_update, user_logout;
     private ImageView imageView;
 
@@ -64,6 +63,16 @@ public class AccountFragment extends Fragment {
         user_phone = (TextView) rootView.findViewById(R.id.user_phone);
         profile_emails = (TextView) rootView.findViewById(R.id.profile_email);
         profile_names = (TextView) rootView.findViewById(R.id.profile_name);
+        profile_logout = (TextView) rootView.findViewById(R.id.user_logout_key);
+
+        profile_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                easyMechAuth.getInstance()
+                        .signOut();
+                startActivity(new Intent(getContext(),Base_Home.class));
+            }
+        });
 
         easyMechAuth = FirebaseAuth.getInstance();
         easyMechCurrentUser = easyMechAuth.getCurrentUser();
@@ -83,9 +92,9 @@ public class AccountFragment extends Fragment {
                 String phone = dataSnapshot.child("mobile").getValue().toString();
                 String pass = dataSnapshot.child("password").getValue().toString();
 
-                String image = dataSnapshot.child("thumb_image").getValue().toString();
+               // String image = dataSnapshot.child("thumb_image").getValue().toString();
 
-                Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePhoto);
+               // Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePhoto);
 
 
 

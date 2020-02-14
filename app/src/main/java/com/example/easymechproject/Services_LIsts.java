@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -42,10 +42,14 @@ public class Services_LIsts extends AppCompatActivity implements NavigationView.
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseAuth easyMechAuth;
+    FirebaseUser admin;
 
     AdapterRecyclerGrid adapterRecyclerGrid;
     ArrayList<Services_Resources> arrayList;
     CoordinatorLayout coordinatorLayout;
+
+    public String admin_name;
+
 
 
 
@@ -78,10 +82,10 @@ public class Services_LIsts extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services__lists);
 
-//        getActionBar().setTitle("Services List");
-   //     getSupportActionBar().setTitle("Services List");
 
         easyMechAuth = FirebaseAuth.getInstance();
+        admin = easyMechAuth.getCurrentUser();
+        admin_name = admin.toString();
 
         gridList();
         recyclerView = findViewById(R.id.recycleView_grid);
@@ -94,8 +98,6 @@ public class Services_LIsts extends AppCompatActivity implements NavigationView.
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contatiner,new HomeFragment()).commit();
 
         toolbar = (Toolbar) findViewById(R.id.tool_Bar);
         setSupportActionBar(toolbar);
@@ -129,13 +131,6 @@ public class Services_LIsts extends AppCompatActivity implements NavigationView.
                             selectedFrag = new NotifyFragment();
                             break;
 
-                        case R.id.nav_favorites:
-                            selectedFrag = new FavoritesFragment();
-                            break;
-
-                        case R.id.nav_search:
-                            selectedFrag = new SearchFragment();
-                            break;
 
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contatiner,
@@ -204,26 +199,21 @@ public class Services_LIsts extends AppCompatActivity implements NavigationView.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu,menu);
         return true;
+
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.logout_option:
-            {
-                Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_LONG).show();
-               // Snackbar.make(findViewById(android.R.id.content),"Your Text Here",Snackbar.LENGTH_LONG).show();
 
-                easyMechAuth.getInstance()
-                        .signOut();
-                startActivity(new Intent(Services_LIsts.this,Base_Home.class));
+            switch (item.getItemId()){
+                case R.id.logout_option:
+                {
+                    Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_LONG).show();
+                    easyMechAuth.getInstance().signOut();
+                    startActivity(new Intent(Services_LIsts.this,Base_Home.class));
+                }
             }
-
-        }
         return true;
     }
-
-
-
 }
