@@ -47,7 +47,9 @@ public class Appointments extends AppCompatActivity{
     Button book_now, reset;
     DatePickerDialog.OnDateSetListener onDateSetListener;
     public String Choose_Date, Choose_Time, Add_Address, Plate_No, Car_Model, Car_Problem;
-    public String Driver_name, Driver_Phone, Driver_Email;
+
+
+    private static String Driver_name, Driver_Phone, Driver_Email;
     private final String CHANNEL_ID = "inbox_style_notification";
     private final int NOTIFICATION_ID = 04;
     RadioButton home_service, center_service;
@@ -55,7 +57,7 @@ public class Appointments extends AppCompatActivity{
     private DatabaseReference easyMechDriverRef;
     private FirebaseAuth easyMechAuth;
     private FirebaseUser easyMechCurrentUser;
-    private DatabaseReference easyMechRef, easyMechRef2;
+    private DatabaseReference easyMechRef, easyMechRef2, easyMechRef3;
     public String Mechanic_Name, Services="";
     double Costs = 0;
     private CheckBox  check1, check2, check3, check4, check5, check6, check7, check8, check9;
@@ -363,12 +365,36 @@ public class Appointments extends AppCompatActivity{
             public void onClick(View v) {
 
                 String total_cost = String.valueOf(Costs);
+                if(total_cost.equals("")){
+                    Toast.makeText(Appointments.this, "Please choose a service",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Car_Model = car_Model.getText().toString();
+                if(Car_Model.equals("")){
+                    Toast.makeText(Appointments.this, "Enter your car model!",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Choose_Date = choose_date.getText().toString();
+                if(Choose_Date.equals("")){
+                    Toast.makeText(Appointments.this, "Pick a date!",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Add_Address = address.getText().toString();
                 Plate_No = car_plate.getText().toString();
+                if(Plate_No.equals("")){
+                    Toast.makeText(Appointments.this, "Your car plate number?",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Choose_Time = choose_time.getText().toString();
+                if(Choose_Time.equals("")){
+                    Toast.makeText(Appointments.this, "Set the time",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Car_Problem = car_problem.getText().toString();
+                if(Car_Problem.equals("")){
+                    Toast.makeText(Appointments.this, "What's up with your car?",Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 easyMechAuth = FirebaseAuth.getInstance();
                 easyMechCurrentUser = easyMechAuth.getCurrentUser();
@@ -376,18 +402,44 @@ public class Appointments extends AppCompatActivity{
                 String user_id = easyMechAuth.getCurrentUser().getUid();
 
 
+                easyMechDriverRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        String driver_name = dataSnapshot.child("name").getValue().toString();
+                        String driver_Email = dataSnapshot.child("email").getValue().toString();
+                        String driver_Phone = dataSnapshot.child("mobile").getValue().toString();
+
+                        Appointments.setDriverDetails(driver_name, driver_Phone, driver_Email);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Appointments.this,"Error Loading User Details",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+
                 easyMechRef = FirebaseDatabase.getInstance().getReference();
                 easyMechRef2 = FirebaseDatabase.getInstance().getReference().child("Drivers").child(user_id).child("Appointments_Lists").push();
-                easyMechRef2.child("Appointment Date").setValue(Choose_Date);
-                easyMechRef2.child("Appointment Time").setValue(Choose_Time);
-                easyMechRef2.child("Appointment Accepted").setValue("false");
-                easyMechRef2.child("Appointment Processed").setValue("false");
-                easyMechRef2.child("Required Service").setValue(Car_Problem);
-                easyMechRef2.child("Total Cost").setValue(total_cost);
-                easyMechRef2.child("Cancelled").setValue("false");
-                easyMechRef2.child("Extra Services").setValue(Services);
+                easyMechRef2.child("Appointment_Date").setValue(Choose_Date);
+                easyMechRef2.child("Appointment_Time").setValue(Choose_Time);
+                easyMechRef2.child("Required_Service").setValue(Car_Problem);
+                easyMechRef2.child("Total_Cost").setValue(total_cost);
+                easyMechRef2.child("Status").setValue("Under Process");
+                easyMechRef2.child("Extra_Services").setValue(Services);
 
                 setMechName(Mechanic_Name);
+
+                //easyMechAuth = FirebaseAuth.getInstance();
+                //String user_id = easyMechAuth.getCurrentUser().getUid();
+                easyMechRef3 = FirebaseDatabase.getInstance().getReference().child("Admin").child("User_Appointments").child("Under Process").child(user_id).push();
+                easyMechRef3.child("Service Center").setValue(Mechanic_Name);
+                easyMechRef3.child("Appointment_Date").setValue(Choose_Date);
+                easyMechRef3.child("Appointment_Time").setValue(Choose_Time);
+                easyMechRef3.child("Total_Cost").setValue(total_cost);
 
 
 
@@ -408,24 +460,23 @@ public class Appointments extends AppCompatActivity{
                 });
 
                 HashMap<String, String> userMap = new HashMap<>();
-                userMap.put("Driver Name", Driver_name);
-                userMap.put("Driver Email", Driver_Email);
-                userMap.put("Driver Phone", Driver_Phone);
-                userMap.put("Car Model", Car_Model);
-                userMap.put("Car Plate", Plate_No);
-                userMap.put("Driver Address", Add_Address);
-                userMap.put("Appointment Date",Choose_Date);
-                userMap.put("Appointment Time", Choose_Time);
-                userMap.put("Appointment Accepted", "false");
-                userMap.put("Appointment Processed", "false");
-                userMap.put("Extra Services",Services);
-                userMap.put("Total Cost", total_cost);
-                userMap.put("Cancelled", "false");
-                userMap.put("Required Service",Car_Problem);
+                userMap.put("Driver_Name", Driver_name);
+                userMap.put("Driver_Email", Driver_Email);
+                userMap.put("Driver_Phone", Driver_Phone);
+                userMap.put("Car_Model", Car_Model);
+                userMap.put("Car_Plate", Plate_No);
+                userMap.put("Driver_Address", Add_Address);
+                userMap.put("Appointment_Date",Choose_Date);
+                userMap.put("Appointment_Time", Choose_Time);
+                userMap.put("Extra_Services",Services);
+                userMap.put("Total_Cost", total_cost);
+                userMap.put("Status", "Under Process");
+                userMap.put("Required_Service",Car_Problem);
+                userMap.put("driver_id",user_id);
 
 
 
-                easyMechRef.child("Mechanics").child(Mechanic_Name).child("Appointments").child(user_id).push().setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                easyMechRef.child("Service Centers").child(Mechanic_Name).child("Appointments").push().setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -434,8 +485,8 @@ public class Appointments extends AppCompatActivity{
 
                             createNotificationChannel();
                             NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
-                            builder.setSmallIcon(R.drawable.bat_tery);
-                            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.bat_tery));
+                            builder.setSmallIcon(R.drawable.easymech_icon);
+                            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.easymech_icon));
                             builder.setContentTitle("Hi Mr. "+Driver_name+ " Thanks For Choosing Our Services");
                             builder.setStyle(new NotificationCompat.InboxStyle()
                                     .addLine(" Your appointment is under processor for Car Model: "+Car_Model +"\n Plate Number: "+Plate_No).addLine("Date Of Appointment: "+Choose_Date+" at "+Choose_Time)
@@ -455,13 +506,12 @@ public class Appointments extends AppCompatActivity{
 
 
                 HashMap<String, String> DriverMap = new HashMap<>();
-                userMap.put("Appointment Date",Choose_Date);
-                userMap.put("Appointment Time", Choose_Time);
-                userMap.put("Appointment Accepted", "false");
-                userMap.put("Appointment Processed", "false");
-                userMap.put("Required Services", Services);
-                userMap.put("Total Cost", total_cost);
-                userMap.put("Cancelled", "false");
+                userMap.put("Appointment_Date",Choose_Date);
+                userMap.put("Appointment_Time", Choose_Time);
+                userMap.put("Extra_Services", Services);
+                userMap.put("Required_Service",Car_Problem);
+                userMap.put("Total_Cost", total_cost);
+                userMap.put("Status", "Under Process");
 
 
 
@@ -490,5 +540,13 @@ public class Appointments extends AppCompatActivity{
     public String getMechName(){
         return Mechanic_Name;
     }
+    public static void setDriverDetails(String name, String phone, String email){
+        Driver_Phone = phone;
+        Driver_name = name;
+        Driver_Email = email;
+    }
 }
+
+
+
 

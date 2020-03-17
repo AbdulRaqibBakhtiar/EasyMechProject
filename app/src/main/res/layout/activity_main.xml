@@ -10,9 +10,10 @@
 
     <ImageView
         android:id="@+id/start_up_backgroud"
-        android:layout_width="201dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="61dp"
+        android:layout_width="241dp"
+        android:layout_height="241dp"
+        android:layout_marginTop="194dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toTopOf="@+id/name7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,12 +24,15 @@
         android:id="@+id/name7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="377dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="209dp"
         android:fontFamily="sans-serif-light"
-        android:text="EASYMECH"
-        android:textSize="39dp"
+        android:text="EasyMech"
+        android:textColor="#fff"
+        android:textSize="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/start_up_backgroud"
         app:layout_constraintTop_toBottomOf="@+id/start_up_backgroud" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

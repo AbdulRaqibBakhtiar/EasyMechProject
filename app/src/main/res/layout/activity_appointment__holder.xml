@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Appointment_Holder">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_Bar"
+        android:layout_width="411dp"
+        android:layout_height="51dp"
+        android:background="#F5A011"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:titleTextColor="#F5A011">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:textColor="#1565C0"
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Client Details"
+        android:textSize="18dp"
+        android:layout_marginLeft="154dp"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client Name: "
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:id="@+id/email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Client E-mail: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="130dp" />
+
+    <TextView
+        android:id="@+id/phone_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Client Address: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="158dp" />
+
+    <TextView
+        android:id="@+id/address_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Client Phone: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="185dp" />
+
+
+    <TextView
+        android:id="@+id/client_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="102dp"
+        android:layout_marginTop="185dp"
+        android:text="address" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="330dp" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Vehicle Details"
+        android:textColor="#1565C0"
+        android:textSize="18dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="227dp" />
+
+    <TextView
+        android:id="@+id/model_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Model and Make: "
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="266dp" />
+
+    <TextView
+        android:id="@+id/plate_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Plate Number: "
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="295dp" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:textColor="#1565C0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Appointment Details"
+        android:textSize="18dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="339dp" />
+
+    <TextView
+        android:id="@+id/client_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="name"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:id="@+id/client_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="email"
+        android:layout_marginLeft="102dp"
+        android:layout_marginTop="130dp" />
+
+    <TextView
+        android:id="@+id/client_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="number"
+        android:layout_marginLeft="114dp"
+        android:layout_marginTop="158dp" />
+
+    <TextView
+        android:id="@+id/vehicle_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="158dp"
+        android:layout_marginTop="295dp"
+        android:text="Plate Number"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_plate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Model and Make"
+
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="266dp" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Required Services: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="380dp" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Other Services: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="420dp" />
+
+    <TextView
+        android:id="@+id/time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#000000"
+        android:text="Time:"
+        android:layout_marginLeft="216dp"
+        android:layout_marginTop="490dp" />
+
+    <TextView
+        android:id="@+id/date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Request Date: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="490dp" />
+
+    <TextView
+        android:id="@+id/cost_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:text="Total Cost: "
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="520dp" />
+
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Status: "
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="550dp" />
+
+    <TextView
+        android:id="@+id/appoint_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="main service"
+        android:layout_marginLeft="136dp"
+        android:layout_marginTop="380dp" />
+
+    <TextView
+        android:id="@+id/appoint_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="other Services"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="420dp" />
+
+    <TextView
+        android:id="@+id/appoint_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="time"
+        android:layout_marginLeft="254dp"
+        android:layout_marginTop="490dp" />
+
+    <TextView
+        android:id="@+id/appoint_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="date"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="490dp" />
+
+    <TextView
+        android:id="@+id/appoint_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#C62828"
+        android:text="cost"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="520dp" />
+
+    <TextView
+        android:id="@+id/appoint_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#2E7D32"
+        android:text="status"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="550dp" />
+
+    <TextView
+        android:id="@+id/completor"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:background="#1565C0"
+        android:fontFamily="sans-serif-light"
+        android:padding="10dp"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:text="Mark Completed"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="590dp" />
+</RelativeLayout>
+

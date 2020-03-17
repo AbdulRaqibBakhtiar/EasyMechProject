@@ -4,8 +4,8 @@ package com.example.easymechproject;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +27,7 @@ public class Base_Home extends AppCompatActivity{
 
     private EditText email;
     private EditText pass_word;
-    private Button _login;
+    private TextView _login, forgotPass;
     public int counter = 5;
     public static String emails, pass;
     private FirebaseAuth easyMechAuth;
@@ -36,22 +36,58 @@ public class Base_Home extends AppCompatActivity{
 
     private DatabaseReference easyMechDriverRef;
 
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            moveTaskToBack(true);
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base__home);
 
         progressDialog = new ProgressDialog(Base_Home.this);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_Bar);
-        toolbar.setTitle("Login");
-        setSupportActionBar(toolbar);
 
         email = (EditText)findViewById(R.id._username);
         pass_word = (EditText)findViewById(R.id._password);
-        _login = (Button)findViewById(R.id.login_btn);
+        _login = (TextView) findViewById(R.id.login_btn);
 
         easyMechDriverRef = FirebaseDatabase.getInstance().getReference().child("Users");
         easyMechAuth = FirebaseAuth.getInstance();
+
+
+        forgotPass = (TextView)findViewById(R.id.fogrgotten_pass);
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Base_Home.this, Fargot_Password.class));
+            }
+        });
+
+        TextView tv = (TextView) findViewById(R.id.sign_up_link);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Base_Home.this, Sign_up_activity.class));
+            }
+        });
 
 
         _login.setOnClickListener(new View.OnClickListener(){
@@ -83,16 +119,7 @@ public class Base_Home extends AppCompatActivity{
         });
     }
 
-    public void sign_up_here(View v){
-        TextView tv = (TextView) findViewById(R.id.sign_up_link);
-        Intent int1 = new Intent(Base_Home.this, Sign_up_activity.class);
-        startActivity(int1);
-    }
 
-    public void forgot_password_here(View v){
-        TextView fp = (TextView) findViewById(R.id.fogrgotten_pass);
-        startActivity(new Intent(Base_Home.this, Fargot_Password.class));
-    }
 
     private void loginUser(String email, String password) {
         easyMechAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -111,6 +138,7 @@ public class Base_Home extends AppCompatActivity{
                     //establishUI(null);
                     Toast.makeText(Base_Home.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
+                    forgotPass.setVisibility(View.VISIBLE);
                 }
             }
         });

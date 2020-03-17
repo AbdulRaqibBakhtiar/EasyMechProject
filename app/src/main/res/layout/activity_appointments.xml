@@ -10,11 +10,11 @@
         android:id="@+id/tool_Bar"
         android:layout_width="411dp"
         android:layout_height="51dp"
-        android:background="#FF5622"
+        android:background="#F5A011"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:titleTextColor="#F44336">
+        android:titleTextColor="#F5A011">
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -24,9 +24,10 @@
         android:id="@+id/Info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Time! Get verified sellers for Car Breakdown Services"
+        android:text="Save Time! Get verified sellers for Car Repairing Services"
         android:textColor="#1565C0"
         android:textSize="16dp"
+        android:fontFamily="sans-serif-light"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="10dp"
         tools:layout_editor_absoluteX="16dp"
@@ -38,6 +39,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="110dp"
         android:layout_marginLeft="8dp"
+        android:fontFamily="sans-serif-light"
         android:textSize="15dp"
         android:hint="Car Model?"
         tools:layout_editor_absoluteX="12dp"
@@ -51,6 +53,7 @@
         android:layout_marginTop="160dp"
         android:layout_marginLeft="8dp"
         android:ems="10"
+        android:fontFamily="sans-serif-light"
         android:hint="Plate Number"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="12dp"
@@ -62,6 +65,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="210dp"
         android:layout_marginLeft="8dp"
+        android:fontFamily="sans-serif-light"
         android:textSize="15dp"
         android:ems="10"
         android:focusable="false"
@@ -76,6 +80,7 @@
         android:layout_height="40dp"
         android:textSize="15dp"
         android:layout_marginTop="260dp"
+        android:fontFamily="sans-serif-light"
         android:layout_marginLeft="8dp"
         android:ems="10"
         android:focusable="false"
@@ -94,6 +99,7 @@
         android:ems="10"
         android:focusable="true"
         android:hint="Tell Us Your Problem"
+        android:fontFamily="sans-serif-light"
         android:inputType="text"
         tools:layout_editor_absoluteX="12dp"
         tools:layout_editor_absoluteY="336dp" />
@@ -144,6 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Location (Select Only One)"
+        android:fontFamily="sans-serif-light"
         android:textColor="#2279DD"
         android:textSize="18dp"
         android:layout_marginTop="460dp"
@@ -155,6 +162,7 @@
         android:id="@+id/ServicesCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
         android:layout_weight="1"
         android:text="Service Center"
         android:textColor="#DF2121"
@@ -168,6 +176,7 @@
         android:id="@+id/HomeService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="490dp"
         android:layout_weight="1"
@@ -191,6 +200,7 @@
             android:layout_height="40dp"
             android:textSize="15dp"
             android:ems="10"
+            android:fontFamily="sans-serif-light"
             android:hint="Enter Address with Zip Code"
             android:inputType="textPersonName"
             android:visibility="gone"
@@ -215,7 +225,7 @@
     <LinearLayout
         android:id="@+id/Linear_Layout2"
         android:layout_width="167dp"
-        android:layout_height="306dp"
+        android:layout_height="316dp"
         android:layout_marginTop="120dp"
         android:layout_marginLeft="240dp"
         android:orientation="vertical"
@@ -228,14 +238,16 @@
             android:textSize="15dp"
             android:textColor="#0277BD"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:text="Extra Services" />
+            android:text="Recommended Services" />
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:textSize="13dp"
+            android:fontFamily="sans-serif-light"
             android:textColor="#292C30"
             android:layout_height="wrap_content"
             android:text="Air Filter" />
@@ -244,6 +256,7 @@
             android:id="@+id/checkBox2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Oil Filter" />
@@ -252,6 +265,7 @@
             android:id="@+id/checkBox3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Engine Oil" />
@@ -260,6 +274,7 @@
             android:id="@+id/checkBox4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Wiper Fluid" />
@@ -268,6 +283,7 @@
             android:id="@+id/checkBox5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Cabin Filter / AC Filter" />
@@ -277,6 +293,7 @@
             android:id="@+id/checkBox6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Car Wash" />
@@ -285,6 +302,7 @@
             android:id="@+id/checkBox7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Interior Vacuuming" />
@@ -293,6 +311,7 @@
             android:id="@+id/checkBox8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Throttle Body Cleaning" />
@@ -301,6 +320,7 @@
             android:id="@+id/checkBox9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:textSize="13dp"
             android:textColor="#292C30"
             android:text="Lost Keys" />

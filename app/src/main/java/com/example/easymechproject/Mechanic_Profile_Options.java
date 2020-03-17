@@ -6,11 +6,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,12 +29,14 @@ public class Mechanic_Profile_Options extends AppCompatActivity {
     FloatingActionButton chat_here;
     private DatabaseReference easyMechMechanicRef, easyMechMechanicsRef;
     String address, email, phones, descriptions, name, titles;
+    ImageView bookerr;
+    private ConstraintLayout backer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         titles = getIntent().getStringExtra("title");
-        String describes = getIntent().getStringExtra("describe");
+        String emailss = getIntent().getStringExtra("email");
        // int imgg = getIntent().getIntExtra("images",imgg);
 
         super.onCreate(savedInstanceState);
@@ -45,10 +49,29 @@ public class Mechanic_Profile_Options extends AppCompatActivity {
         user_address = (TextView)findViewById(R.id.user_addresses);
         pro_email = (TextView)findViewById(R.id.profile_email);
         pro_name = (TextView)findViewById(R.id.profile_name);
+        backer = (ConstraintLayout)findViewById(R.id.my_layout);
+
+        if(titles.equals("Auto Car Experts")){
+            backer.setBackgroundResource(R.drawable.auto_experts);
+        }
+        else if(titles.equals("HYDER KHAN MOTOR Garage")){
+            backer.setBackgroundResource(R.drawable.bavarati_auto);
+        }
+        else if(titles.equals("Sharayu Toyota")){
+            backer.setBackgroundResource(R.drawable.sharya_toyota);
+        }
+        else if(titles.equals("Auto Pro")){
+            backer.setBackgroundResource(R.drawable.auto_pro);
+        }
+        else if(titles.equals("Alcon Hyundai")){
+            backer.setBackgroundResource(R.drawable.alcon_hyndai);
+        }
+        else if(titles.equals("Bavaria Motors Pvt Ltd")){
+            backer.setBackgroundResource(R.drawable.haider_khan);
+        }
 
 
-        easyMechMechanicRef = FirebaseDatabase.getInstance().getReference().child("Mechanics").child(titles);
-        easyMechMechanicRef.keepSynced(true);
+        easyMechMechanicRef = FirebaseDatabase.getInstance().getReference().child("Service Centers").child(titles);
         easyMechMechanicRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -57,6 +80,8 @@ public class Mechanic_Profile_Options extends AppCompatActivity {
                 phones = dataSnapshot.child("phone").getValue().toString();
                 descriptions = dataSnapshot.child("description").getValue().toString();
                 name = dataSnapshot.getValue().toString();
+                //name = dataSnapshot.child("name").getValue().toString();
+                //................................................................................................................
 
                 //String image = dataSnapshot.child("thumb_image").getValue().toString();
                 //Picasso.get().load(image).placeholder(R.drawable.default_profile).into(profilePhoto);

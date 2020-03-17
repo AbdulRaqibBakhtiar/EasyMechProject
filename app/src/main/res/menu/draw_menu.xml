@@ -43,12 +43,6 @@
                 android:title="Feedback">
 
             </item>
-            <item
-                android:id="@+id/Report_prob"
-                android:icon="@drawable/ic_report"
-                android:title="Report a Problem">
-
-            </item>
         </menu>
     </item>
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/easymech_start"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/start_up_backgroud"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/name7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/easymech_icon" />
+
+    <TextView
+        android:id="@+id/name7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="87dp"
+        android:fontFamily="sans-serif-light"
+        android:text=" EasyMech"
+        android:textColor="#fff"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/home_page_signup"
+        app:layout_constraintStart_toStartOf="@+id/start_up_backgroud"
+        app:layout_constraintTop_toBottomOf="@+id/start_up_backgroud" />
+
+    <TextView
+        android:id="@+id/home_page_login"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/trans_button"
+        android:text=" Log In"
+        android:textAlignment="center"
+
+        android:textColor="#fff"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/terms_and_policy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/good_view" />
+
+    <TextView
+        android:id="@+id/home_page_signup"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        android:background="@drawable/main_buttons"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="#F5A011"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/good_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name7" />
+
+    <TextView
+        android:id="@+id/good_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Already have an EasyMech Account!"
+        android:textColor="#fff"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/home_page_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_page_signup" />
+
+    <TextView
+        android:id="@+id/terms_and_policy"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="147dp"
+        android:fontFamily="sans-serif-light"
+        android:text="By using EasyMech, you agree to our Terms of Use and Privacy Policy"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_page_login" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

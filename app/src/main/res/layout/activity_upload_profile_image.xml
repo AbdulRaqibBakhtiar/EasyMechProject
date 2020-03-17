@@ -1,43 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    android:padding="16dp"
-    xmlns:android1="http://schemas.android.com/apk/res/android">
 
-    <!--Linear Layout with horizontal orientation
-        and other properties-->
-    <LinearLayout
-        android:id="@+id/layout_button"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_profile_image"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:clickable="true"
+        android:src="@drawable/default_profile"
+        android:layout_marginLeft="136dp"
+        android:layout_marginTop="43dp" />
 
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <!--Button for choosing image from gallery-->
-        <Button
-            android:id="@+id/btnChoose"
-            android:text="Choose"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
 
-        <!--Button for uploading image-->
-        <Button
-            android:id="@+id/btnUpload"
-            android:text="Upload"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
-    <!--Image View for showing image choosen from gallery-->
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/my_email"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="User Email"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="230dp"/>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/my_email1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft= "40dp"
+        android:layout_marginTop="320dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/my_name"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="193dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/mobile_spinner"
+        android:layout_width="62dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="395dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/my_phone"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft= "103dp"
+        android:layout_marginTop="390dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/my_number"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="Number"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="193dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/update_user_details"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/update_btn"
+        android:text="Update Profile"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="550dp" />
+
+
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class AdapterList extends BaseAdapter{
     }
 
     public class ViewHolder{
-        TextView title, describe;
+        TextView title, describe, email;
         ImageView image;
     }
     @Override
@@ -58,6 +58,7 @@ public class AdapterList extends BaseAdapter{
             holder.title = view.findViewById(R.id.titles);
             holder.describe = view.findViewById(R.id.description);
             holder.image = view.findViewById(R.id.images);
+            holder.email = view.findViewById(R.id.email);
 
             view.setTag(holder);
 
@@ -65,11 +66,13 @@ public class AdapterList extends BaseAdapter{
                 public void onClick(View v) {
                     String titles = holder.title.getText().toString();
                     String diss = holder.describe.getText().toString();
+                    String emails = holder.email.getText().toString();
                     for(int i=0;i<getCount();i++){
                         if(position==i){
                             Intent int2 = new Intent(mContext,Mechanic_Profile_Options.class);
                             int2.putExtra("title",titles);
                             int2.putExtra("describe",diss);
+                            int2.putExtra("email",emails);
                            // int2.putExtra("images",image);
                             mContext.startActivity(int2);
                         }
@@ -87,6 +90,7 @@ public class AdapterList extends BaseAdapter{
         holder.title.setText(easyMechMechanics.get(position).getTitle());
         holder.describe.setText(easyMechMechanics.get(position).getDescription());
         holder.image.setImageResource(easyMechMechanics.get(position).getImages());
+        holder.email.setText(easyMechMechanics.get(position).getEmail());
 
         return view;
     }

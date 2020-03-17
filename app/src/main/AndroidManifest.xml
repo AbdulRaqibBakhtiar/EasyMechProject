@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".System_management"></activity>
+        <activity android:name=".Send_FAQ"></activity>
+        <activity android:name=".Appointment_Holder" />
+        <activity android:name=".Feedback" />
+        <activity android:name=".About_US" />
+        <activity android:name=".FAQ" />
+        <activity android:name=".HelpScreen" />
+        <activity android:name=".AppointViewHolder" />
+        <activity android:name=".Client_List" />
+        <activity android:name=".Manage_System_Users" />
+        <activity android:name=".Manage_Service_Centers" />
+        <activity android:name=".Booking_Services" />
+        <activity android:name=".Home_Page" />
+        <activity android:name=".System_management" />
         <activity android:name=".UploadProfileImage" />
         <activity android:name=".ChatApp" />
         <activity android:name=".Appointments" />

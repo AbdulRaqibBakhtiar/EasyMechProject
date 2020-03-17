@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_Bar"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="#F5A011"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:titleTextColor="#F5A011">
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="120dp"
+        android:layout_marginTop="60dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="150dp"
+        app:srcCompat="@drawable/easymech_icon" />
+
+    <LinearLayout
+        android:id="@+id/second_layout"
+        android:orientation="vertical"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#1565C0"
+            android:textSize="20dp"
+            android:text="Send us your quetion through your E-mail"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+        <TextView
+            android:id="@+id/edit_text_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="easyMech100@gmail.com"
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title:"
+            android:textColor="#1565C0"
+            android:textSize="18dp"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/edit_text_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textSize="16dp"
+            android:hint="Question Title ..."
+            android:inputType="textEmailSubject" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#1565C0"
+            android:textSize="18dp"
+            android:text="Question:"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/edit_text_message"
+            android:layout_width="381dp"
+            android:layout_height="163dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="16dp"
+            android:gravity="start|top"
+            android:hint="Enter your question here ..."
+            android:lines="10" />
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#fff"
+            android:layout_height="wrap_content"
+            android:text="send"
+            android:textSize="16dp"
+            android:background="#1565C0"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+
+

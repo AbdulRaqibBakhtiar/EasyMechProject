@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private static int OPEN_TIME_OUT = 5000;
+    private static int OPEN_TIME_OUT = 4000;
 
     FirebaseAuth easyMechAuth;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
 
-                    Intent logIn = new Intent(MainActivity.this, Base_Home.class);
+                    Intent logIn = new Intent(MainActivity.this, Home_Page.class);
                     startActivity(logIn);
                     finish();
                 }

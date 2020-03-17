@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="#E2590F"
+    android:layout_height="190dp"
+    android:background="#F5A011"
     android:gravity="bottom"
     android:padding="16dp"
     >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icons" />
 
+    <ImageView
+        android:layout_width="146dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/easymech_icon" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="EasyMech"
-        android:textColor="#0A0A0A"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:text="EASYMECH"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#fff" />
 
-</LinearLayout>
+</RelativeLayout>

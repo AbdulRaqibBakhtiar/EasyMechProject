@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+<!--    <ImageView
+        android:id="@+id/emadd"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="171dp"
+        android:layout_marginBottom="53dp"
+        android:src="@drawable/empty_message"
+        app:layout_constraintBottom_toTopOf="@+id/titles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications"
-        android:textSize="25dp"
         android:layout_centerInParent="true"
-        />
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="354dp"
+        android:text="You don't have any notification"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/emadd"
+        app:layout_constraintTop_toBottomOf="@+id/emadd" />-->
 
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/client_recycler"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

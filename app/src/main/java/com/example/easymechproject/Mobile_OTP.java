@@ -1,7 +1,11 @@
 package com.example.easymechproject;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +29,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 
 public class Mobile_OTP extends AppCompatActivity {
     private Button _confirm;
@@ -30,9 +38,25 @@ public class Mobile_OTP extends AppCompatActivity {
     private FirebaseAuth Verify;
     private EditText code_text;
     private String code;
+    String name;
     private ProgressBar PB;
     ProgressDialog progressDialog;
+    private final String CHANNEL_ID = "inbox_style_notification";
+    private final int NOTIFICATION_ID = 04;
 
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            CharSequence name = "InboxStyleNotification Notification";
+            String description = "Include all the InboxStyleNotification notification";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +67,7 @@ public class Mobile_OTP extends AppCompatActivity {
         Verify = FirebaseAuth.getInstance();
         _confirm = (Button) findViewById(R.id.confirm_1);
         String phonenumber = getIntent().getStringExtra("phonenumber");
+        name = getIntent().getStringExtra("name");
         send_OTP(phonenumber);
 
 
@@ -76,6 +101,21 @@ public class Mobile_OTP extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+                    createNotificationChannel();
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+                    builder.setSmallIcon(R.drawable.easymech_icon);
+                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.easymech_icon));
+                    builder.setContentTitle("Welcome to EasyMech!");
+                    builder.setStyle(new NotificationCompat.InboxStyle()
+                            .addLine(" Hi Mr. "+name+" welcome to EasyMech")
+                            .addLine("EasyMech aims to provide you the best vehicle repairment and maintenance services")
+                            .setSummaryText("Your EasyMech Team")
+                    );
+                    builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(Mobile_OTP.this);
+                    notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+
                     Intent int2 = new Intent(Mobile_OTP.this, Base_Home.class);
                     int2.setFlags(int2.FLAG_ACTIVITY_NEW_TASK | int2.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(int2);

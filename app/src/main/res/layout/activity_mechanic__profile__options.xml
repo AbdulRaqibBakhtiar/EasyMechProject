@@ -15,6 +15,7 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_layout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/shop_view_demo"
@@ -29,6 +30,7 @@
                 android:layout_gravity="left"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="39dp"
+                android:fontFamily="sans-serif-light"
                 android:padding="10dp"
                 android:text="Name Comes Here"
                 android:textColor="#fff"
@@ -42,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:fontFamily="sans-serif-light"
                 android:paddingLeft="10dp"
                 android:text="Email Comes Here"
                 android:textColor="#fff"
@@ -72,6 +75,8 @@
                 android:id="@+id/user_account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:fontFamily="sans-serif-light"
                 android:layout_gravity="center_vertical"
                 android:textColor="#0277BD"
                 android:textSize="22dp"
@@ -90,6 +95,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#090909"
                 android:textSize="16dp"
+
+                android:fontFamily="sans-serif-light"
                 android:layout_marginBottom="7dp"
                 android:text="Description Comes Here"
                 />
@@ -142,7 +149,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#1091DD"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#136CDF"
+                android:textSize="15dp"
                 android:clickable="true"
                 android:onClick="map_from_here"
                 android:paddingLeft="20dp"
@@ -167,8 +176,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:textColor="#E67211"
+                android:textColor="#136CDF"
+                android:textSize="15dp"
                 android:clickable="true"
+                android:fontFamily="sans-serif-light"
                 android:onClick="call_from_here"
                 android:text="Phone Number Comes Here" />
 
@@ -189,12 +200,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
-                android:textColor="#00695C"
+                android:textColor="#136CDF"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif-light"
                 android:onClick="appoint_from_here"
                 android:paddingLeft="20dp"
                 android:text="Set an appintment" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="329dp"
@@ -212,7 +226,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:clickable="true"
-                android:textColor="#2D5F34"
+                android:textColor="#136CDF"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif-light"
                 android:onClick="appoint_from_here"
                 android:paddingLeft="20dp"
                 android:text="Email Comes Here" />
@@ -237,4 +253,5 @@
             android:layout_marginLeft="100dp"
             android:src="@drawable/chat_to_mechanic" />
     </RelativeLayout>
+
 </LinearLayout>
