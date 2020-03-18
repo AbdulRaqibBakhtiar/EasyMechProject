@@ -218,7 +218,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
                                                                 final String date2 = dataSnapshot.child(key2).child("Appointment_Date").getValue().toString();
 
                                                                 if(date2.equals(datess)){
-                                                                    Toast.makeText(mCtx,"The Appointment has been accepted!",Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(mCtx,"The Appointment has been cancelled!",Toast.LENGTH_LONG).show();
                                                                     getEasyMechDriver.child(user_id).child("Appointments_Lists").child(key2).child("Status").setValue("Rejected");
                                                                 }
                                                             }
@@ -230,7 +230,6 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
 
                                                         }
                                                     });
-                                                    Toast.makeText(mCtx,"The appointment for car with plate : "+field+ " is deleted!",Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                     builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -295,7 +294,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
                                                                 final String date2 = dataSnapshot.child(key2).child("Appointment_Date").getValue().toString();
 
                                                                 if(date2.equals(datess)){
-                                                                    Toast.makeText(mCtx,"Request Completed!",Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(mCtx,"You have accepted the appointmet!",Toast.LENGTH_LONG).show();
                                                                     getEasyMechDriver.child(user_id).child("Appointments_Lists").child(key2).child("Status").setValue("Accpeted");
                                                                 }
                                                             }

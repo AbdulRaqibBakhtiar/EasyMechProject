@@ -121,7 +121,7 @@ public class Notification_Adapter extends RecyclerView.Adapter<Notification_Adap
             Extra_service = (TextView)itemView.findViewById(R.id.d_extra);
 
 
-
+/*
             Cancel = (TextView)itemView.findViewById(R.id.d_cancel);
 
             Cancel.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +197,7 @@ public class Notification_Adapter extends RecyclerView.Adapter<Notification_Adap
                     });
 
                 }
-            });
+            });*/
 
         }
     }

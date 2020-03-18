@@ -113,7 +113,7 @@ public class Appointment_Holder extends AppCompatActivity {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Appointment_Holder.this);
                                 builder.setCancelable(true);
                                 builder.setTitle("Set Service Completed!");
-                                builder.setMessage("Is the appointment processed successfully?");
+                                builder.setMessage("Is the appointment completed successfully?");
                                 builder.setPositiveButton("Yes",
                                         new DialogInterface.OnClickListener() {
                                             @Override
